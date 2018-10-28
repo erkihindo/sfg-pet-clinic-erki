@@ -4,11 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class IndexController {
+public class VetController {
 
-    @RequestMapping({"/", "", "index.html"})
-    public String index() {
+    @RequestMapping({"/vets"})
+    public String list() {
 
-        return "index";
+        return "vet/vets";
     }
 }
