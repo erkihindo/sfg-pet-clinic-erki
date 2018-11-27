@@ -2,9 +2,12 @@ package erki.springframework.sfgpetclinicerki.services.map;
 
 import erki.springframework.sfgpetclinicerki.model.Owner;
 import erki.springframework.sfgpetclinicerki.services.CrudService;
+import erki.springframework.sfgpetclinicerki.services.OwnerService;
 import java.util.Set;
+import org.springframework.stereotype.Service;
 
-public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements CrudService<Owner, Long> {
+@Service
+public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
 
     @Override
     public Set<Owner> findAll() {

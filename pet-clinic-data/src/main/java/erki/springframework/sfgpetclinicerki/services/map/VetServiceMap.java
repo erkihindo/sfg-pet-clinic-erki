@@ -2,9 +2,12 @@ package erki.springframework.sfgpetclinicerki.services.map;
 
 import erki.springframework.sfgpetclinicerki.model.Vet;
 import erki.springframework.sfgpetclinicerki.services.CrudService;
+import erki.springframework.sfgpetclinicerki.services.VetService;
 import java.util.Set;
+import org.springframework.stereotype.Service;
 
-public class VetServiceMap extends AbstractMapService<Vet, Long> implements CrudService<Vet, Long> {
+@Service
+public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {
 
     @Override
     public Set<Vet> findAll() {
