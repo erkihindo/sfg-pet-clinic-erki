@@ -3,9 +3,11 @@ package erki.springframework.sfgpetclinicerki.bootstrap;
 import erki.springframework.sfgpetclinicerki.model.Owner;
 import erki.springframework.sfgpetclinicerki.model.Pet;
 import erki.springframework.sfgpetclinicerki.model.PetType;
+import erki.springframework.sfgpetclinicerki.model.Speciality;
 import erki.springframework.sfgpetclinicerki.model.Vet;
 import erki.springframework.sfgpetclinicerki.services.OwnerService;
 import erki.springframework.sfgpetclinicerki.services.PetTypeService;
+import erki.springframework.sfgpetclinicerki.services.SpecialityService;
 import erki.springframework.sfgpetclinicerki.services.VetService;
 import java.time.LocalDate;
 import org.springframework.boot.CommandLineRunner;
@@ -17,17 +19,28 @@ public class DataLoaderService implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
     private final PetTypeService petTypeService;
+    private final SpecialityService specialityService;
 
     public DataLoaderService(
         OwnerService ownerService,
-        VetService vetService, PetTypeService petTypeService) {
+        VetService vetService, PetTypeService petTypeService,
+        SpecialityService specialityService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
+        this.specialityService = specialityService;
     }
 
     @Override
     public void run(String... args) throws Exception {
+        int count = petTypeService.findAll().size();
+
+        if (count == 0) {
+            loadData();
+        }
+    }
+
+    private void loadData() {
 
         PetType dog = new PetType();
         dog.setName("dog");
@@ -36,6 +49,18 @@ public class DataLoaderService implements CommandLineRunner {
         PetType cat = new PetType();
         cat.setName("cat");
         PetType savedCatType = petTypeService.save(cat);
+
+        Speciality radiology = new Speciality();
+        radiology.setDescription("radiology");
+        Speciality savedRadio = specialityService.save(radiology);
+
+        Speciality surgery = new Speciality();
+        surgery.setDescription("surgery");
+        Speciality savedSurg = specialityService.save(surgery);
+
+        Speciality dentistry = new Speciality();
+        dentistry.setDescription("dentistry");
+        Speciality savedDentistry = specialityService.save(dentistry);
 
         Owner owner1 = new Owner();
         owner1.setFirstName("Michael");
@@ -72,13 +97,16 @@ public class DataLoaderService implements CommandLineRunner {
         Vet vet1 = new Vet();
         vet1.setFirstName("Sam");
         vet1.setLastName("Axe");
+        vet1.getSpecialities().add(savedRadio);
         vetService.save(vet1);
 
         Vet vet2 = new Vet();
         vet2.setFirstName("Jessie");
         vet2.setLastName("Porter");
+        vet2.getSpecialities().add(savedSurg);
         vetService.save(vet2);
 
         System.out.println("Loaded Vets....");
+
     }
 }
