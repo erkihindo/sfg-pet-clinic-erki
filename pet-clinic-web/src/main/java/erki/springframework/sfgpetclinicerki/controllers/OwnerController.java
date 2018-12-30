@@ -20,4 +20,10 @@ public class OwnerController {
 
         return "owner/owners";
     }
+
+    @RequestMapping({"/find"})
+    public String find(Model model) {
+
+        return "notimplemented";
+    }
 }
