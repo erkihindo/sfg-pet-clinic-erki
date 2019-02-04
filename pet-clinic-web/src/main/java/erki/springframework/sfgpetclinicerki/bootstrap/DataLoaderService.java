@@ -5,10 +5,12 @@ import erki.springframework.sfgpetclinicerki.model.Pet;
 import erki.springframework.sfgpetclinicerki.model.PetType;
 import erki.springframework.sfgpetclinicerki.model.Speciality;
 import erki.springframework.sfgpetclinicerki.model.Vet;
+import erki.springframework.sfgpetclinicerki.model.Visit;
 import erki.springframework.sfgpetclinicerki.services.OwnerService;
 import erki.springframework.sfgpetclinicerki.services.PetTypeService;
 import erki.springframework.sfgpetclinicerki.services.SpecialityService;
 import erki.springframework.sfgpetclinicerki.services.VetService;
+import erki.springframework.sfgpetclinicerki.services.VisitService;
 import java.time.LocalDate;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -20,15 +22,17 @@ public class DataLoaderService implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
     public DataLoaderService(
         OwnerService ownerService,
         VetService vetService, PetTypeService petTypeService,
-        SpecialityService specialityService) {
+        SpecialityService specialityService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -107,6 +111,13 @@ public class DataLoaderService implements CommandLineRunner {
         vetService.save(vet2);
 
         System.out.println("Loaded Vets....");
+
+        Visit catVisit = new Visit();
+        catVisit.setPet(fionasCat);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Sneezy Kitty");
+
+        visitService.save(catVisit);
 
     }
 }

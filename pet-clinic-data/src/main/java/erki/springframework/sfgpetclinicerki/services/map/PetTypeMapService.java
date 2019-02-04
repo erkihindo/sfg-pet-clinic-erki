@@ -3,13 +3,15 @@ package erki.springframework.sfgpetclinicerki.services.map;
 import erki.springframework.sfgpetclinicerki.model.PetType;
 import erki.springframework.sfgpetclinicerki.services.PetTypeService;
 import java.util.Set;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 
 import java.util.Set;
 
 @Service
-public class PetTypeServiceMap extends AbstractMapService<PetType, Long> implements PetTypeService {
+@Profile({"default", "map"})
+public class PetTypeMapService extends AbstractMapService<PetType, Long> implements PetTypeService {
 
     @Override
     public Set<PetType> findAll() {

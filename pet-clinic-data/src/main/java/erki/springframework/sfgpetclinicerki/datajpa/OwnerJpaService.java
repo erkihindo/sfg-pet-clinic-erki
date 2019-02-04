@@ -5,9 +5,11 @@ import erki.springframework.sfgpetclinicerki.repositories.OwnerRepository;
 import erki.springframework.sfgpetclinicerki.services.OwnerService;
 import java.util.HashSet;
 import java.util.Set;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
+@Profile("jpa")
 public class OwnerJpaService implements OwnerService {
 
     private final OwnerRepository ownerRepository;
