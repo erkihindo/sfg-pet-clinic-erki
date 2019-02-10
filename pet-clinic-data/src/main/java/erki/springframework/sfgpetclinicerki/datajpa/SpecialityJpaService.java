@@ -5,9 +5,11 @@ import erki.springframework.sfgpetclinicerki.repositories.SpecialityRepository;
 import erki.springframework.sfgpetclinicerki.services.SpecialityService;
 import java.util.HashSet;
 import java.util.Set;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
+@Profile("jpa")
 public class SpecialityJpaService implements SpecialityService {
 
     private final SpecialityRepository SpecialityRepository;

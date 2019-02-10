@@ -5,9 +5,11 @@ import erki.springframework.sfgpetclinicerki.repositories.PetRepository;
 import erki.springframework.sfgpetclinicerki.services.PetService;
 import java.util.HashSet;
 import java.util.Set;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
+@Profile("jpa")
 public class PetJpaService implements PetService {
 
     private final PetRepository PetRepository;
